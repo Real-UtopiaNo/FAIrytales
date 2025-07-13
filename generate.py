@@ -28,7 +28,7 @@ tools = [
     }
 ]
 
-def generate_content(prompt):
+def generate_content_example(prompt):
     # 发起请求
     response = client.chat.completions.create(
         model="deepseek-chat",  # 或 deepseek-coder
@@ -54,3 +54,15 @@ def generate_content(prompt):
         print(f"Prompt {i+1}")
         print(prompt)
     return args["name_of_the_book"], args["content_of_the_book"], args["visual_descriptions"]
+
+def generate_content_vanilla(prompt):
+    response = client.chat.completions.create(
+        model="deepseek-chat",  # 或 deepseek-coder
+        messages=[
+            {"role": "system", "content": "You are an experienced fairytale author for children"},
+            {"role": "user", "content": prompt}
+        ],
+        # tools=tools,
+        tool_choice="auto"
+    )
+    return response.choices[0].message.content

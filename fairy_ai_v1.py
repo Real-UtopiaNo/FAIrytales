@@ -20,8 +20,12 @@ with open("config.yaml", "r", encoding='utf-8') as file:
 """
 Get prompt for LLM, then pass it to API, return title, parts, t2iprompts, ......
 """
-prompt = generate_prompt_example()
-title, parts, t2iprompts = generate_content(prompt)
+prompt = generate_prompt(config=config)
+print(prompt)
+reply = generate_content_vanilla(prompt=prompt)
+print(reply)
+
+# title, parts, t2iprompts = generate_content_example(prompt)
 
 
 # os.makedirs(os.path.join("books", title), exist_ok=True)
