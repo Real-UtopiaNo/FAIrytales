@@ -1,10 +1,19 @@
-title: "小熊的奇幻冒险"
+title: "壮壮的奇幻冒险"
 characters:
-  - name: "小熊"
-    trait: "勇敢"
-  - name: "狐狸"
-    trait: "聪明"
+  - name: "壮壮"
+    # trait: "勇敢"
+    species: "人类"
+  - name: "吱吱"
+    # trait: "聪明"
+    species: "小鸟"
 lesson: "要诚实守信"
-style: "温馨治愈"
+scene: "森林"
+trg_age: 5
+word_len: 800
 language: "zh"
-voice: "female"
+#     lang = {"zh":"中文",
+            # "en":"英文",
+            # "fr":"法语",
+            # "ca":"粤语正字"}
+part_num: 10
+good_words: "['氤氲','欢声笑语','痛改前非',]"

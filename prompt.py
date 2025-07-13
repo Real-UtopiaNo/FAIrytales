@@ -39,4 +39,50 @@ def generate_prompt(config):
     输入Config实例
     输出prompt字符串
     '''
-    pass
+    # 角色提示词
+    characters_prompt = ""
+    for i, character_setting in enumerate(config["characters"]):
+        character_prompt = f"\t第{i+1}个角色："
+        if character_setting["name"]:
+            character_prompt += f"\t\t名字：{character_setting['name']}"
+        if character_setting["species"]:
+            character_prompt += f"\t\t物种：{character_setting['species']}"
+
+        characters_prompt += character_prompt+"\n"
+
+    # 文本语言
+    lang = {"zh":"中文",
+            "en":"英文",
+            "fr":"法语",
+            "ca":"粤语正字"}
+
+
+    prompt = f"""
+你是一名童话故事创作者。
+现在请根据以下设定，生成一篇童话故事，并将其分成 {config["part_num"]} 个段落，每段约 {config["word_len"]//config["part_num"]} 字，并提供**一句**图片提示词。童话故事中必须包含指定的好词好句，以便让阅读者学习。
+
+【设定】
+标题：{config["title"]}
+角色：\n{characters_prompt}
+寓意：{config["lesson"]}
+语言：{lang[config["language"]]}
+目标年龄：{config["trg_age"]}
+好词好句：{"、".join(eval(config['good_words']))}
+
+【输出格式】
+第1段：
+内容：...（约 {config["word_len"]//config["part_num"]} 字）
+图片提示词：...
+
+第2段：
+内容：...
+图片提示词：...
+
+请严格遵守段落数和输出格式。
+""".strip()
+    return prompt
+
+def build_prompt(config):
+    avg_len = config.word_len // config.part_num
+    character_names = ", ".join([c.name for c in config.characters])
+    return 
