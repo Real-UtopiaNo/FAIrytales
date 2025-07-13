@@ -71,12 +71,12 @@ def generate_prompt(config):
 
 【输出格式】
 第1段：
-内容：...（约 {config["word_len"]//config["part_num"]} 字）
-图片提示词：...
+内容：<第1段故事内容，约 {config["word_len"]//config["part_num"]} 字>
+图片提示词：<用于生成图片的描述语句>
 
 第2段：
-内容：...
-图片提示词：...
+内容：<第2段故事内容，约 {config["word_len"]//config["part_num"]} 字>
+图片提示词：<用于生成图片的描述语句>
 
 请严格遵守段落数和输出格式。
 """.strip()
