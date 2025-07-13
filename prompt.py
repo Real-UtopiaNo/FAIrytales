@@ -34,9 +34,9 @@ def generate_prompt_example():
     ]
     return generate_prompt_example1(characters=characters)
 
-def generate_prompt(config_file):
+def generate_prompt(config):
     '''
-    输入config.json文件的路径
+    输入Config实例
     输出prompt字符串
     '''
     pass
