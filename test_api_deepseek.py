@@ -46,4 +46,7 @@ args = json.loads(tool_call.function.arguments)
 # 打印结构化 JSON
 print(json.dumps(args, indent=2, ensure_ascii=False))
 
+with open("output.json", "w", encoding="utf-8") as f:
+    f.write(json.dumps(args, indent=2, ensure_ascii=False))
+
 
