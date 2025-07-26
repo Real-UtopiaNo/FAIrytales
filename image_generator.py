@@ -3,7 +3,7 @@ import torch
 from diffusers import AutoPipelineForText2Image
 from PIL import Image
 from typing import Dict, List, Optional, Any
-
+from googletrans import Translator  # 使用 Google 翻译 API
 
 DEFAULT_MODEL_ID = "lykon/dreamshaper-8"
 DEFAULT_DEVICE = "cuda"  # change to "cpu" if no GPU
@@ -13,26 +13,13 @@ DEFAULT_HEIGHT = 512
 # Global pipeline cache so we don't re-download / re-load for every image.
 _PIPELINE = None
 
-
+# Load pipeline function
 def load_pipeline(
     model_id: str = DEFAULT_MODEL_ID,
     device: str = DEFAULT_DEVICE,
     torch_dtype: torch.dtype = torch.float16,
     cache_dir: Optional[str] = None,
 ) -> AutoPipelineForText2Image:
-    """Load (and memoize) the diffusion pipeline.
-
-    Parameters
-    ----------
-    model_id:
-        Hugging Face model repo id.
-    device:
-        "cuda" or "cpu".
-    torch_dtype:
-        torch datatype to load weights (fp16 saves memory on GPU).
-    cache_dir:
-        Optional explicit cache directory; useful to avoid permission errors.
-    """
     global _PIPELINE
     if _PIPELINE is None:
         _PIPELINE = AutoPipelineForText2Image.from_pretrained(
@@ -53,12 +40,6 @@ def generate_image(
     height: Optional[int] = 512,
     pipeline: Optional[AutoPipelineForText2Image] = None,
 ) -> Image.Image:
-    """Generate an image from a text prompt.
-
-    width / height must be multiples of 8 (most SD models want multiples of 64
-    for best results; the pipeline will usually pad internally but it's good to
-    respect that). If omitted, defaults are used.
-    """
     if pipeline is None:
         pipeline = load_pipeline()
 
@@ -78,12 +59,11 @@ def generate_image(
 
 
 def save_image(image: Image.Image, filepath: str) -> None:
-    """Save a PIL image to the given path, creating parent dirs if needed."""
     try:
         os.makedirs(os.path.dirname(filepath), exist_ok=True)
         image.save(filepath)
         print(f"Image saved to: {filepath}")
-    except Exception as e:  # broad catch so we can see what went wrong
+    except Exception as e:
         print(f"Failed to save image: {e}")
 
 
@@ -95,30 +75,15 @@ def process_story_for_images(
     output_root: str = "books",
     **gen_overrides: Any,
 ) -> List[str]:
-    """Generate and save images for each part of a structured story.
-
-    Story format (minimal):
-    {
-        "title": "The Little Prince",
-        "parts": [
-            {"t2i_prompt": "A sheep is eating grass.", "width": 512, "height": 512},
-            {"t2i_prompt": "The Little Prince tending to his asteroid garden, watercolor style", "width": 768, "height": 512},
-            ...
-        ]
-    }
-
-    Returns a list of saved image file paths.
-    """
     if not story_data:
         print("Error: no story data provided.")
         return []
 
     title = story_data.get("title", "untitled_story")
-    parts = story_data.get("parts", [])
+    parts = story_data.get("story_parts", [])
 
     print(f"--- Generating images for story '{title}' ---")
 
-    # Create output directory for this story
     output_dir = os.path.join(output_root, title)
     os.makedirs(output_dir, exist_ok=True)
     print(f"Images will be saved under: {output_dir}")
@@ -134,7 +99,6 @@ def process_story_for_images(
             print(f"[Part {idx}] Warning: no t2i_prompt found; skipping.")
             continue
 
-        # Allow per-part width/height override
         w = part.get("width", default_width)
         h = part.get("height", default_height)
 
@@ -159,26 +123,44 @@ def process_story_for_images(
     print("\nDone.")
     return saved_paths
 
+# --- Helper functions for translation ---
+def is_english(text: str) -> bool:
+    """Check if a string is in English."""
+    return all(ord(c) < 128 for c in text)
 
-# -----------------------------------------------------------------------------
+def translate_to_english(text: str) -> str:
+    """Translate the input text to English using Google Translate."""
+    translator = Translator()
+    try:
+        translated = translator.translate(text, src='auto', dest='en')
+        return translated.text
+    except Exception as e:
+        print(f"Translation failed: {e}")
+        return text  # If translation fails, return the original text
+
+# ---------------------------------------------------------------------------
 # Example usage
-# -----------------------------------------------------------------------------
+# ---------------------------------------------------------------------------
 if __name__ == "__main__":
-    example_story = {
-        "title": "The Little Prince",
-        "parts": [
+    structured_story = {
+        "title": "壮壮的奇幻冒险",
+        "story_parts": [
             {
-                "t2i_prompt": "A sheep is eating grass.",
-                "width": 512,
-                "height": 512,
+                "part_number": 1,
+                "content": "在一个氤氲着晨雾的小村庄里，住着一个名叫壮壮的小男孩。他每天都会去森林里玩耍，和一只名叫吱吱的小鸟做朋友。吱吱的歌声清脆悦耳，为森林带来了欢声笑语。",
+                "t2i_prompt": "一个小男孩和一只小鸟在晨雾弥漫的森林里玩耍。"
             },
-            {
-                "t2i_prompt": "The Little Prince tending to his asteroid garden, watercolor style.",
-                "width": 768,
-                "height": 512,
-            },
+            # More parts go here...
         ],
     }
 
+    # Translate any non-English prompts
+    print("\n--- Ensuring all image prompts are in English ---")
+    for part in structured_story.get("story_parts", []):
+        t2i_prompt = part.get("t2i_prompt")
+        if t2i_prompt and not is_english(t2i_prompt):  # 检查是否是英文
+            print(f"Converting prompt to English: {t2i_prompt}")
+            part["t2i_prompt"] = translate_to_english(t2i_prompt)
 
-    process_story_for_images(example_story)
+    # Generate images for the story
+    process_story_for_images(structured_story)

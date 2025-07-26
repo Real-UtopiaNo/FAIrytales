@@ -8,6 +8,12 @@ from prompt import *
 from tts import *
 from generate import generate_and_parse_story # 只导入我们需要的统一函数
 from image_generator import process_story_for_images # 导入图片处理函数
+import translators as ts
+
+def translate_text(text, target_language="en"):
+    # Translate using Google Translator engine
+    translated_text = ts.translate_text(text,to_language=target_language)
+    return translated_text
 
 """
 Create config from yaml file. Example of config:
@@ -20,7 +26,7 @@ with open("config.yaml", "r", encoding='utf-8') as file:
 
 
 """
-Get prompt for LLM, then pass it to API, return title, parts, t2iprompts, ......
+Get prompt for LLM, then pass it to API, return title, parts, t2iprompts, ...... 
 """
 # 1. 保持 prompt 生成逻辑不变
 prompt = generate_prompt(config=config)
@@ -35,6 +41,14 @@ structured_story = generate_and_parse_story(prompt=prompt)
 if structured_story:
     print("\n--- Successfully generated and parsed story ---")
     print(json.dumps(structured_story, indent=2, ensure_ascii=False))
+    structured_story["title"] = translate_text(structured_story.get("title",""))
+    print(structured_story["title"])
+    # 确保图片生成的 prompt 是英文的
+    print("\n--- Ensuring all image prompts are in English ---")
+    for part in structured_story.get("story_parts", []):
+        part["t2i_prompt"] = translate_text(part.get("t2i_prompt",""))
+        # print(part["t2i_prompt"])
+  
 
     # 直接将生成的结构化数据传递给图片处理模块
     print("\n--- Handing off to image generator ---")
@@ -44,3 +58,4 @@ else:
 
 
 # os.makedirs(os.path.join("books", title), exist_ok=True)
+
