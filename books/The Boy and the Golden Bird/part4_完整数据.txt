@@ -1,0 +1,7 @@
+{
+  "part_number": 4,
+  "content": "At the top of the ladder, Leo found himself in a floating garden, filled with flowers that sang and trees that bore jewels instead of fruit. The golden bird led him to a crystal-clear pond. \"Look into the water,\" it said. As Leo gazed, he saw not his reflection, but the faces of people from his village, each one smiling and content. The bird explained, \"This is the future you can create—one of kindness and joy.\"",
+  "t2i_prompt": "A floating garden with singing flowers and jeweled trees surrounds a crystal-clear pond. A boy kneels by the pond, looking into the water where reflections of happy villagers appear. A golden bird stands beside him.",
+  "width": 800,
+  "height": 600
+}

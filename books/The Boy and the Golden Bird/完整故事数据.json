@@ -1,0 +1,40 @@
+{
+  "title": "The Boy and the Golden Bird",
+  "story_parts": [
+    {
+      "part_number": 1,
+      "content": "Once upon a time, in a small village nestled between rolling hills, lived a kind-hearted boy named Leo. Leo was known for his love of nature, especially the birds that sang in the trees outside his cottage. One morning, as he sat by the window, a golden bird with shimmering feathers landed on the sill. Its song was unlike any Leo had ever heard—melodic and filled with magic. The bird looked at Leo with wise, knowing eyes, as if it had a secret to share.",
+      "t2i_prompt": "A young boy with curly brown hair sits by a wooden window, gazing in awe at a golden bird with shimmering feathers perched on the sill. The morning sun casts a warm glow over the scene, and the bird's eyes sparkle with wisdom.",
+      "width": 800,
+      "height": 600
+    },
+    {
+      "part_number": 2,
+      "content": "The golden bird hopped closer to Leo and dropped a tiny, glowing seed into his hand. \"Plant this,\" the bird whispered in a voice like wind chimes, \"and it will grow into something extraordinary.\" Leo, though surprised the bird could speak, trusted its words. He carefully planted the seed in his garden, watering it with care. Days passed, and soon a slender shoot emerged, its leaves glinting like gold in the sunlight.",
+      "t2i_prompt": "A golden bird hovers near a boy's outstretched hand, dropping a glowing seed into his palm. The background is a cozy cottage garden with vibrant flowers and a soft golden light illuminating the scene.",
+      "width": 800,
+      "height": 600
+    },
+    {
+      "part_number": 3,
+      "content": "As the plant grew taller, it began to twist and turn, forming a ladder that reached high into the sky. The golden bird returned and perched on the topmost rung. \"Climb,\" it urged Leo. With a deep breath, Leo began his ascent. The higher he climbed, the more the world below seemed to fade, replaced by swirling clouds and a sky painted in hues of pink and gold.",
+      "t2i_prompt": "A golden ladder stretches into the sky, its rungs shimmering with light. A boy climbs the ladder, looking up at a golden bird perched at the top. The sky is a dreamy mix of pink and gold clouds.",
+      "width": 800,
+      "height": 600
+    },
+    {
+      "part_number": 4,
+      "content": "At the top of the ladder, Leo found himself in a floating garden, filled with flowers that sang and trees that bore jewels instead of fruit. The golden bird led him to a crystal-clear pond. \"Look into the water,\" it said. As Leo gazed, he saw not his reflection, but the faces of people from his village, each one smiling and content. The bird explained, \"This is the future you can create—one of kindness and joy.\"",
+      "t2i_prompt": "A floating garden with singing flowers and jeweled trees surrounds a crystal-clear pond. A boy kneels by the pond, looking into the water where reflections of happy villagers appear. A golden bird stands beside him.",
+      "width": 800,
+      "height": 600
+    },
+    {
+      "part_number": 5,
+      "content": "Leo returned to his village with a heart full of hope. He shared the golden bird's message and worked tirelessly to spread kindness. Over time, the village flourished, and the golden bird became a symbol of their unity. Though the bird never returned, Leo often heard its song in the wind, a reminder that magic and goodness were always within reach.",
+      "t2i_prompt": "A grown-up Leo stands in a vibrant village square, surrounded by happy villagers. A golden bird is depicted in a mural on a nearby wall, and the wind carries the faint sound of its song.",
+      "width": 800,
+      "height": 600
+    }
+  ]
+}

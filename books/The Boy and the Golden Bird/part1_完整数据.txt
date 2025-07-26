@@ -1,0 +1,7 @@
+{
+  "part_number": 1,
+  "content": "Once upon a time, in a small village nestled between rolling hills, lived a kind-hearted boy named Leo. Leo was known for his love of nature, especially the birds that sang in the trees outside his cottage. One morning, as he sat by the window, a golden bird with shimmering feathers landed on the sill. Its song was unlike any Leo had ever heard—melodic and filled with magic. The bird looked at Leo with wise, knowing eyes, as if it had a secret to share.",
+  "t2i_prompt": "A young boy with curly brown hair sits by a wooden window, gazing in awe at a golden bird with shimmering feathers perched on the sill. The morning sun casts a warm glow over the scene, and the bird's eyes sparkle with wisdom.",
+  "width": 800,
+  "height": 600
+}

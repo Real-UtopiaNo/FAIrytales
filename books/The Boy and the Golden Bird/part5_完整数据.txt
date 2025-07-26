@@ -1,0 +1,7 @@
+{
+  "part_number": 5,
+  "content": "Leo returned to his village with a heart full of hope. He shared the golden bird's message and worked tirelessly to spread kindness. Over time, the village flourished, and the golden bird became a symbol of their unity. Though the bird never returned, Leo often heard its song in the wind, a reminder that magic and goodness were always within reach.",
+  "t2i_prompt": "A grown-up Leo stands in a vibrant village square, surrounded by happy villagers. A golden bird is depicted in a mural on a nearby wall, and the wind carries the faint sound of its song.",
+  "width": 800,
+  "height": 600
+}

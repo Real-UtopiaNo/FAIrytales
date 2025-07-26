@@ -1,0 +1,7 @@
+{
+  "part_number": 2,
+  "content": "The golden bird hopped closer to Leo and dropped a tiny, glowing seed into his hand. \"Plant this,\" the bird whispered in a voice like wind chimes, \"and it will grow into something extraordinary.\" Leo, though surprised the bird could speak, trusted its words. He carefully planted the seed in his garden, watering it with care. Days passed, and soon a slender shoot emerged, its leaves glinting like gold in the sunlight.",
+  "t2i_prompt": "A golden bird hovers near a boy's outstretched hand, dropping a glowing seed into his palm. The background is a cozy cottage garden with vibrant flowers and a soft golden light illuminating the scene.",
+  "width": 800,
+  "height": 600
+}

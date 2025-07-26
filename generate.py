@@ -1,5 +1,6 @@
 import re
 import json
+import os
 from openai import OpenAI
 
 # Initialize OpenAI client, compatible with DeepSeek API
@@ -114,6 +115,52 @@ def generate_and_parse_story(prompt: str, default_width: int = 512, default_heig
     print("--- Error: Both Function Calling and Regex parsing failed. ---")
     return None
 
+def save_story_to_files(story_data, base_path="books"):
+    """
+    将每段的完整原始数据直接保存到txt文件，不做任何提取或格式化
+    """
+    if not story_data:
+        print("错误：没有可保存的故事数据")
+        return False
+
+    title = story_data.get("title", "未命名故事")
+    story_parts = story_data.get("story_parts", [])
+
+    # 创建以故事标题命名的文件夹
+    book_folder = os.path.join(base_path, title)
+    os.makedirs(book_folder, exist_ok=True)
+    
+    # 保存每段的完整原始数据
+    for part in story_parts:
+        part_number = part.get("part_number", 1)
+        
+        # 创建段落文件名
+        filename = f"part{part_number}_完整数据.txt"
+        filepath = os.path.join(book_folder, filename)
+        
+        # 直接保存原始数据，不做任何提取
+        try:
+            with open(filepath, 'w', encoding='utf-8') as f:
+                json.dump(part, f, ensure_ascii=False, indent=2)
+            print(f"已保存段落 {part_number} 的完整数据到：{filepath}")
+        except Exception as e:
+            print(f"保存段落 {part_number} 时出错：{e}")
+            return False
+    
+    # 保存整个故事的完整原始数据
+    full_filename = f"完整故事数据.json"
+    full_filepath = os.path.join(book_folder, full_filename)
+    
+    try:
+        with open(full_filepath, 'w', encoding='utf-8') as f:
+            json.dump(story_data, f, ensure_ascii=False, indent=2)
+        print(f"已保存完整故事数据到：{full_filepath}")
+    except Exception as e:
+        print(f"保存完整故事数据时出错：{e}")
+        return False
+    
+    return True
+
 # Example usage
 if __name__ == "__main__":
     prompt = "Please generate a fairytale story about a boy and a bird with image prompts for each part."
@@ -125,7 +172,14 @@ if __name__ == "__main__":
         print("\n--- Successfully generated and parsed story ---")
         print(json.dumps(structured_story, indent=2, ensure_ascii=False))
 
-        # Optionally, print the parts and verify width and height
+        # 保存故事到文件
+        save_success = save_story_to_files(structured_story)
+        if save_success:
+            print("\n--- 故事内容已成功保存到文件 ---")
+        else:
+            print("\n--- 保存故事内容时出错 ---")
+            
+        # 打印段落信息
         for part in structured_story.get("story_parts", []):
             print(f"Part {part['part_number']} - Width: {part['width']}, Height: {part['height']}")
     else:

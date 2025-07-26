@@ -3,8 +3,8 @@ import yaml
 import os
 import json
 from prompt import *
-# from generate import *
-# from t2i import *
+from generate import *
+from t2i import *
 from tts import *
 from generate import generate_and_parse_story # 只导入我们需要的统一函数
 from image_generator import process_story_for_images # 导入图片处理函数
@@ -35,7 +35,16 @@ print(prompt)
 
 # 2. 调用统一的生成和解析函数
 structured_story = generate_and_parse_story(prompt=prompt)
+if structured_story:
+    print("\n--- Successfully generated and parsed story ---")
+    print(json.dumps(structured_story, indent=2, ensure_ascii=False))
 
+    # 保存故事到文件
+    save_success = save_story_to_files(structured_story)
+    if save_success:
+        print("\n--- 故事内容已成功保存到文件 ---")
+    else:
+        print("\n--- 保存故事内容时出错 ---")
 
 # 3. 打印最终的结构化数据
 if structured_story:
