@@ -41,8 +41,6 @@ structured_story = generate_and_parse_story(prompt=prompt)
 if structured_story:
     print("\n--- Successfully generated and parsed story ---")
     print(json.dumps(structured_story, indent=2, ensure_ascii=False))
-    structured_story["title"] = translate_text(structured_story.get("title",""))
-    print(structured_story["title"])
     # 确保图片生成的 prompt 是英文的
     print("\n--- Ensuring all image prompts are in English ---")
     for part in structured_story.get("story_parts", []):
