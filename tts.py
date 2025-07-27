@@ -40,7 +40,7 @@ class TTSGenerator:
         "father": "zh-CN-YunjianNeural",         # 父亲音色
         "mother": "zh-CN-XiaoxiaoNeural",        # 母亲音色
         "friend": "zh-CN-XiaoyiNeural",          # 朋友音色
-        "narrator": "zh-CN-XiaomoNeural",        # 旁白音色
+        "narrator": "zh-CN-XiaoxiaoNeural",      # 旁白音色
         "child": "zh-CN-XiaoyiNeural",           # 儿童音色
         
         # 英文角色音色
@@ -89,7 +89,7 @@ class TTSGenerator:
         # 默认返回xiaoxiao音色
         return self.CHINESE_VOICES["xiaoxiao"]
     
-    async def text_to_speech_async(self, text: str, output_path: str, voice: Optional[str] = None) -> bool:
+    async def text_to_speech_async(self, text: str, output_path: str, voice: Optional[str] = None, max_retries: int = 3) -> bool:
         """
         异步文本转语音
         
@@ -97,44 +97,63 @@ class TTSGenerator:
             text: 要转换的文本
             output_path: 输出音频文件路径
             voice: 音色名称，如果为None则使用默认音色
+            max_retries: 最大重试次数
             
         Returns:
             转换是否成功
         """
-        try:
-            # 检查文本是否为空
-            if not text or not text.strip():
-                print(f"警告：文本内容为空，跳过语音生成")
-                return False
-            
-            # 确定使用的音色
-            voice_id = self._get_voice_id(voice) if voice else self.default_voice
-            
-            # 创建输出目录（如果路径包含目录）
-            output_dir = os.path.dirname(output_path)
-            if output_dir:
-                os.makedirs(output_dir, exist_ok=True)
-            
-            # 处理过长的文本（edge-tts有字符限制）
-            max_length = 3000  # 设置最大字符数
-            if len(text) > max_length:
-                print(f"警告：文本长度({len(text)})超过限制({max_length})，将截断处理")
-                text = text[:max_length] + "..."
-            
-            # 创建TTS通信对象
-            communicate = edge_tts.Communicate(text, voice_id)
-            
-            # 生成语音并保存
-            await communicate.save(output_path)
-            
-            print(f"成功生成语音文件：{output_path}")
-            return True
-            
-        except Exception as e:
-            print(f"生成语音时出错：{e}")
-            print(f"使用的音色：{voice_id if 'voice_id' in locals() else 'unknown'}")
-            print(f"文本长度：{len(text) if text else 0}")
+        # 检查文本是否为空
+        if not text or not text.strip():
+            print(f"警告：文本内容为空，跳过语音生成")
             return False
+        
+        # 确定使用的音色
+        voice_id = self._get_voice_id(voice) if voice else self.default_voice
+        
+        # 创建输出目录（如果路径包含目录）
+        output_dir = os.path.dirname(output_path)
+        if output_dir:
+            os.makedirs(output_dir, exist_ok=True)
+        
+        # 处理过长的文本（edge-tts有字符限制）
+        max_length = 1000  # 减少最大字符数以提高稳定性
+        if len(text) > max_length:
+            print(f"警告：文本长度({len(text)})超过限制({max_length})，将截断处理")
+            text = text[:max_length]
+        
+        print(f"🔊 正在生成语音: {output_path}")
+        print(f"   使用音色: {voice_id}")
+        print(f"   文本长度: {len(text)} 字符")
+        print(f"   文本内容: {text[:50]}{'...' if len(text) > 50 else ''}")
+        
+        # 重试机制
+        for attempt in range(max_retries):
+            try:
+                print(f"   尝试 {attempt + 1}/{max_retries}")
+                
+                # 创建TTS通信对象
+                communicate = edge_tts.Communicate(text, voice_id)
+                
+                # 生成语音并保存
+                await communicate.save(output_path)
+                
+                # 检查文件是否成功生成
+                if os.path.exists(output_path) and os.path.getsize(output_path) > 0:
+                    print(f"✅ 成功生成语音文件：{output_path}")
+                    return True
+                else:
+                    print(f"⚠️  文件生成但为空，尝试重新生成...")
+                    continue
+                    
+            except Exception as e:
+                print(f"❌ 第{attempt + 1}次尝试失败：{e}")
+                if attempt < max_retries - 1:
+                    print(f"   等待2秒后重试...")
+                    await asyncio.sleep(2)
+                else:
+                    print(f"❌ 所有重试都失败了")
+        
+        return False
     
     def text_to_speech(self, text: str, output_path: str, voice: Optional[str] = None) -> bool:
         """
