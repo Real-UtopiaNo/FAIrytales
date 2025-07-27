@@ -5,7 +5,7 @@ import json
 from prompt import *
 from generate import *
 from t2i import *
-from tts import *
+from tts import process_story_for_tts
 from generate import generate_and_parse_story # 只导入我们需要的统一函数
 from image_generator import process_story_for_images # 导入图片处理函数
 import translators as ts
@@ -60,6 +60,22 @@ if structured_story:
     # 直接将生成的结构化数据传递给图片处理模块
     print("\n--- Handing off to image generator ---")
     process_story_for_images(structured_story)
+    
+    # 生成TTS语音文件
+    print("\n--- Handing off to TTS generator ---")
+    # 可以根据配置文件中的设置来配置音色
+    voice_config = {
+        "default": "narrator",  # 默认使用旁白音色
+        # 可以根据需要为不同段落配置不同音色
+        # "part_1": "child",
+        # "part_2": "mother"
+    }
+    
+    tts_success = process_story_for_tts(structured_story, voice_config)
+    if tts_success:
+        print("✅ 语音文件生成完成！")
+    else:
+        print("❌ 语音文件生成失败")
 else:
     print("\n--- Failed to get structured story after all attempts. ---")
 
