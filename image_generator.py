@@ -3,10 +3,10 @@ import torch
 from diffusers import AutoPipelineForText2Image
 from PIL import Image
 from typing import Dict, List, Optional, Any
-from googletrans import Translator  # 使用 Google 翻译 API
+# Translation functionality removed - handled in main script
 
 DEFAULT_MODEL_ID = "lykon/dreamshaper-8"
-DEFAULT_DEVICE = "cuda"  # change to "cpu" if no GPU
+DEFAULT_DEVICE = "cpu"  # change to "cpu" if no GPU
 DEFAULT_WIDTH = 512
 DEFAULT_HEIGHT = 512
 
@@ -17,7 +17,7 @@ _PIPELINE = None
 def load_pipeline(
     model_id: str = DEFAULT_MODEL_ID,
     device: str = DEFAULT_DEVICE,
-    torch_dtype: torch.dtype = torch.float16,
+    torch_dtype: torch.dtype = torch.float32,
     cache_dir: Optional[str] = None,
 ) -> AutoPipelineForText2Image:
     global _PIPELINE
@@ -129,14 +129,8 @@ def is_english(text: str) -> bool:
     return all(ord(c) < 128 for c in text)
 
 def translate_to_english(text: str) -> str:
-    """Translate the input text to English using Google Translate."""
-    translator = Translator()
-    try:
-        translated = translator.translate(text, src='auto', dest='en')
-        return translated.text
-    except Exception as e:
-        print(f"Translation failed: {e}")
-        return text  # If translation fails, return the original text
+    """Translation is handled in main script, return original text."""
+    return text  # Translation handled elsewhere
 
 # ---------------------------------------------------------------------------
 # Example usage

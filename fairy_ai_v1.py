@@ -4,7 +4,7 @@ import os
 import json
 from prompt import *
 from generate import *
-from t2i import *
+# from t2i import *  # t2i module not found, using image_generator instead
 from tts import process_story_for_tts
 from generate import generate_and_parse_story # 只导入我们需要的统一函数
 from image_generator import process_story_for_images # 导入图片处理函数
@@ -65,7 +65,7 @@ if structured_story:
     print("\n--- Handing off to TTS generator ---")
     # 可以根据配置文件中的设置来配置音色
     voice_config = {
-        "default": "narrator",  # 默认使用旁白音色
+        "default": "xiaoxiao",  # 使用测试成功的音色
         # 可以根据需要为不同段落配置不同音色
         # "part_1": "child",
         # "part_2": "mother"
