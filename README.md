@@ -3,4 +3,5 @@
 ## Install
 conda create -n fairy python=3.10
 conda activate fairy
-pip install openai pyyaml torch diffuser translator edge-tts googletrans==4.0.0rc1
+pip install torch==2.4.1 --index-url https://download.pytorch.org/whl/cu118
+pip install openai pyyaml torch diffusers edge-tts transformers

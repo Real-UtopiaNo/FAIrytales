@@ -59,7 +59,7 @@ def generate_prompt(config):
 
     prompt = f"""
 你是一名童话故事创作者。
-现在请根据以下设定，生成一篇童话故事，并将其分成 {config["part_num"]} 个段落，每段约 {config["word_len"]//config["part_num"]} 字，并提供**一句**图片提示词。童话故事中必须包含指定的好词好句，以便让阅读者学习。
+现在请根据以下设定，生成一篇童话故事，并将其分成 {config["part_num"]} 个段落，每段约 {config["word_len"]//config["part_num"]} 字，并**用英文**提供一句图片提示词。童话故事中必须包含指定的好词好句，以便让阅读者学习。
 
 【设定】
 标题：{config["title"]}
@@ -72,11 +72,11 @@ def generate_prompt(config):
 【输出格式】
 第1段：
 内容：<第1段故事内容，约 {config["word_len"]//config["part_num"]} 字>
-图片提示词：<用于生成图片的描述语句>
+图片提示词：<用于生成图片的英文描述语句>
 
 第2段：
 内容：<第2段故事内容，约 {config["word_len"]//config["part_num"]} 字>
-图片提示词：<用于生成图片的描述语句>
+图片提示词：<用于生成图片的英文描述语句>
 
 请严格遵守段落数和输出格式。
 """.strip()

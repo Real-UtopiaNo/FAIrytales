@@ -8,12 +8,12 @@ from generate import *
 from tts import process_story_for_tts
 from generate import generate_and_parse_story # 只导入我们需要的统一函数
 from image_generator import process_story_for_images # 导入图片处理函数
-import translators as ts
+# import translators as ts
 
-def translate_text(text, target_language="en"):
-    # Translate using Google Translator engine
-    translated_text = ts.translate_text(text,to_language=target_language)
-    return translated_text
+# def translate_text(text, target_language="en"):
+#     # Translate using Google Translator engine
+#     translated_text = ts.translate_text(text,to_language=target_language)
+#     return translated_text
 
 """
 Create config from yaml file. Example of config:
