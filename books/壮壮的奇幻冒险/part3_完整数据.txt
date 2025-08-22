@@ -1,7 +1,7 @@
 {
   "part_number": 3,
-  "content": "壮壮迫不及待地跑进花园，但他不小心踩坏了一朵小花。吱吱提醒他要诚实守信，壮壮羞愧地低下头，决定向花园道歉。",
-  "t2i_prompt": "小男孩低头看着被踩坏的小花，小鸟站在他肩膀上安慰他。",
+  "content": "突然传来呜呜的哭声，粉耳朵小兔子莉莉抱着胡萝卜蹲在石头旁：“我的星星宝石不见了！没有它，森林晚会就没法点亮彩灯了……”壮壮摸了摸口袋，早上捡到的亮晶晶石头好像就是莉莉说的宝石！他紧张地攥紧了拳头。",
+  "t2i_prompt": "Sad little rabbit with pink ears holding carrot, boy standing beside her with hands in pockets, worried expression, forest background with colorful mushrooms",
   "width": 800,
-  "height": 600
+  "height": 500
 }

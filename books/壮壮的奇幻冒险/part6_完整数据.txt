@@ -1,7 +1,7 @@
 {
   "part_number": 6,
-  "content": "回家的路上，壮壮遇到了一只迷路的小兔子。他想起吱吱的话，决定帮助小兔子找到家。吱吱赞许地点点头。",
-  "t2i_prompt": "小男孩和小鸟蹲在迷路的小兔子旁边，森林背景温馨。",
+  "content": "“对不起莉莉，我不该藏起宝石。”壮壮把星星宝石放在莉莉的胡萝卜篮子里。宝石“叮”地一声亮起来，比之前更耀眼！莉莉惊喜地抱住他：“谢谢你送回来！我们一起去开晚会吧！”",
+  "t2i_prompt": "Boy handing glowing star gem to happy rabbit, both smiling, sparkles around the gem, forest clearing with lanterns starting to light up",
   "width": 800,
-  "height": 600
+  "height": 500
 }

@@ -1,7 +1,7 @@
 {
   "part_number": 7,
-  "content": "壮壮和吱吱带着小兔子穿过森林，终于找到了它的家。兔妈妈感激地送给他们一篮子胡萝卜。壮壮开心地说：“帮助别人真快乐！”",
-  "t2i_prompt": "小男孩和小鸟站在兔子洞前，兔妈妈递给他们一篮子胡萝卜。",
+  "content": "晚会的彩灯像萤火虫一样闪烁，小动物们围着篝火跳舞。吱吱衔来一片金色的叶子：“这是诚实勋章！”壮壮把叶子别在胸前，突然明白：真正的魔法不是宝石，是说真话时心里暖暖的感觉。",
+  "t2i_prompt": "Forest party with animals dancing around bonfire, colorful lanterns hanging on trees, boy wearing a golden leaf badge on his chest, bird flying nearby",
   "width": 800,
-  "height": 600
+  "height": 500
 }

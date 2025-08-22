@@ -1,7 +1,7 @@
 {
   "part_number": 1,
-  "content": "在一个氤氲的清晨，壮壮背着书包走在森林小路上。突然，他听到一阵欢声笑语，原来是一只叫吱吱的小鸟在树枝上唱歌。吱吱邀请壮壮一起冒险，壮壮兴奋地答应了。",
-  "t2i_prompt": "一个阳光透过树叶的森林，小男孩壮壮仰头看着树枝上的小鸟吱吱。",
+  "content": "清晨，小草尖挂着露珠，花园里氤氲着淡淡的雾气。五岁的壮壮蹲在石阶上，忽然听见“啾啾”声——一只羽毛像焦糖布丁的小鸟正歪头看他。“我叫吱吱，带你去彩虹森林玩呀！”小鸟扑棱着翅膀说。",
+  "t2i_prompt": "Little boy squatting on stone steps, small brown bird with big eyes beside him, misty garden with dewdrops on green grass, morning sunlight through trees",
   "width": 800,
-  "height": 600
+  "height": 500
 }

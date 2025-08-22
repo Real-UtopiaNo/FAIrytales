@@ -1,7 +1,7 @@
 {
   "part_number": 8,
-  "content": "第二天，壮壮在学校里发现同桌的小明偷拿了别人的铅笔。他想起自己的经历，决定劝小明痛改前非。",
-  "t2i_prompt": "小男孩在教室里，严肃地对另一个小男孩说话，小鸟停在窗台上。",
+  "content": "第二天清晨，壮壮在花园里发现更多小伙伴：松鼠送来坚果，小鹿带来野花。“因为你痛改前非，大家都想和你做朋友呀！”吱吱站在彩虹色的鸟窝里唱歌，阳光驱散了最后一丝氤氲，照得整个花园金灿灿的。",
+  "t2i_prompt": "Morning garden with golden sunlight, boy surrounded by friendly animals (squirrel, deer, rabbit), bird singing in a rainbow-colored nest, mist lifting",
   "width": 800,
-  "height": 600
+  "height": 500
 }

@@ -1,7 +1,7 @@
 {
   "part_number": 2,
-  "content": "壮壮和吱吱来到一片神秘的花园，花园里开满了五颜六色的花朵。吱吱告诉壮壮，花园里藏着一颗能实现愿望的宝石，但只有诚实的人才能找到它。",
-  "t2i_prompt": "小男孩和小鸟站在满是鲜花的奇幻花园中，远处有一道神秘的光芒。",
+  "content": "壮壮跟着吱吱飞过开满蒲公英的小山坡，眼前突然展开一片七彩森林！溪水唱着叮咚歌，蘑菇撑着花伞，小动物们围坐在一起讲故事，到处都是欢声笑语。“这里的魔法宝石能实现愿望哦！”吱吱指着发光的树洞说。",
+  "t2i_prompt": "Colorful forest with rainbow trees, little boy and bird flying over dandelion hills, animals sitting in a circle laughing, glowing tree hole with sparkles",
   "width": 800,
-  "height": 600
+  "height": 500
 }

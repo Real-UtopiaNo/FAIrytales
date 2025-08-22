@@ -1,7 +1,7 @@
 {
   "part_number": 10,
-  "content": "晚上，壮壮躺在床上，回想这一天的冒险。吱吱飞进窗口，对他说：“诚实守信会让你拥有更多朋友。”壮壮微笑着进入了梦乡。",
-  "t2i_prompt": "小男孩躺在床上，小鸟停在窗台上，月光洒进房间。",
+  "content": "妈妈喊壮壮回家吃早饭时，他的口袋里多了一片会发光的叶子。“壮壮今天帮助了朋友吗？”妈妈笑着问。壮壮用力点头：“诚实比宝石更珍贵！”窗外，吱吱正对着他唱起了诚实的歌。",
+  "t2i_prompt": "Boy sitting at breakfast table showing glowing leaf to his mother, mother smiling, bird singing outside the window, sunny kitchen with flowers",
   "width": 800,
-  "height": 600
+  "height": 500
 }

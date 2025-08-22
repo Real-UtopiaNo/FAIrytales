@@ -1,7 +1,7 @@
 {
   "part_number": 9,
-  "content": "小明起初不以为然，但壮壮耐心地告诉他诚实的重要性。小明终于承认错误，归还了铅笔。老师表扬了他们。",
-  "t2i_prompt": "两个小男孩在教室里握手言和，老师微笑着看着他们。",
+  "content": "壮壮把宝石放回树洞时，树洞里跳出一群发光的小精灵：“诚实的孩子会收到永远的冒险邀请！”他和吱吱击掌约定：“下次我们去云朵城堡探险吧！”欢声笑语又充满了每一个角落，比任何魔法都动听。",
+  "t2i_prompt": "Glowing fairies emerging from a tree hole, boy and bird high-fiving, rainbow forest in background with animals cheering, sparkles everywhere",
   "width": 800,
-  "height": 600
+  "height": 500
 }

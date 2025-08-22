@@ -1,7 +1,7 @@
 {
   "part_number": 5,
-  "content": "壮壮拿起宝石，许愿让花园恢复原样。瞬间，花园变得更加美丽，花朵们欢快地摇曳着。吱吱笑着说：“诚实的力量真神奇！”",
-  "t2i_prompt": "小男孩举起宝石，花园里的花朵重新绽放，小鸟在一旁飞舞。",
+  "content": "壮壮睡不着，想起莉莉红通通的眼睛。月光透过窗户照在宝石上，它突然黯淡下去，像一颗普通的石头。“原来不诚实会让魔法消失呀！”壮壮跳下床，抓起宝石往森林跑，雾气又开始氤氲，像在给他指路。",
+  "t2i_prompt": "Little boy running through misty forest path at night, holding a dim stone in hand, moonlight shining through trees, worried but determined expression",
   "width": 800,
-  "height": 600
+  "height": 500
 }

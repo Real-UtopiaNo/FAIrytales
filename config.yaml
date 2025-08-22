@@ -1,3 +1,26 @@
+# LLM Configuration
+llm:
+  provider: "doubao"  # 可选项: "deepseek", "qwen", "doubao"
+  
+  deepseek:
+    api_key: "sk-38195cc9744a44e385c221cb7b865ecc"
+    base_url: "https://api.deepseek.com/v1"
+    generation_model: "deepseek-chat"
+    safety_check_model: "deepseek-chat"
+  
+  qwen:
+    api_key: "sk-730e01db22894a569154dde05d9450fd"
+    base_url: "https://dashscope.aliyuncs.com/compatible-mode/v1"
+    generation_model: "qwen-plus"
+    safety_check_model: "qwen-plus"
+
+  doubao:
+    api_key: "0a50e63f-16b9-43b6-bfec-7bc9c9aa9570"
+    base_url: "https://ark.cn-beijing.volces.com/api/v3"
+    generation_model: "doubao-seed-1-6-250615"
+    safety_check_model: "doubao-seed-1-6-250615"
+
+# Story Configuration
 title: "壮壮的奇幻冒险"
 characters:
   - name: "壮壮"

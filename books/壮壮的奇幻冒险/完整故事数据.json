@@ -3,73 +3,73 @@
   "story_parts": [
     {
       "part_number": 1,
-      "content": "在一个氤氲的清晨，壮壮背着书包走在森林小路上。突然，他听到一阵欢声笑语，原来是一只叫吱吱的小鸟在树枝上唱歌。吱吱邀请壮壮一起冒险，壮壮兴奋地答应了。",
-      "t2i_prompt": "一个阳光透过树叶的森林，小男孩壮壮仰头看着树枝上的小鸟吱吱。",
+      "content": "清晨，小草尖挂着露珠，花园里氤氲着淡淡的雾气。五岁的壮壮蹲在石阶上，忽然听见“啾啾”声——一只羽毛像焦糖布丁的小鸟正歪头看他。“我叫吱吱，带你去彩虹森林玩呀！”小鸟扑棱着翅膀说。",
+      "t2i_prompt": "Little boy squatting on stone steps, small brown bird with big eyes beside him, misty garden with dewdrops on green grass, morning sunlight through trees",
       "width": 800,
-      "height": 600
+      "height": 500
     },
     {
       "part_number": 2,
-      "content": "壮壮和吱吱来到一片神秘的花园，花园里开满了五颜六色的花朵。吱吱告诉壮壮，花园里藏着一颗能实现愿望的宝石，但只有诚实的人才能找到它。",
-      "t2i_prompt": "小男孩和小鸟站在满是鲜花的奇幻花园中，远处有一道神秘的光芒。",
+      "content": "壮壮跟着吱吱飞过开满蒲公英的小山坡，眼前突然展开一片七彩森林！溪水唱着叮咚歌，蘑菇撑着花伞，小动物们围坐在一起讲故事，到处都是欢声笑语。“这里的魔法宝石能实现愿望哦！”吱吱指着发光的树洞说。",
+      "t2i_prompt": "Colorful forest with rainbow trees, little boy and bird flying over dandelion hills, animals sitting in a circle laughing, glowing tree hole with sparkles",
       "width": 800,
-      "height": 600
+      "height": 500
     },
     {
       "part_number": 3,
-      "content": "壮壮迫不及待地跑进花园，但他不小心踩坏了一朵小花。吱吱提醒他要诚实守信，壮壮羞愧地低下头，决定向花园道歉。",
-      "t2i_prompt": "小男孩低头看着被踩坏的小花，小鸟站在他肩膀上安慰他。",
+      "content": "突然传来呜呜的哭声，粉耳朵小兔子莉莉抱着胡萝卜蹲在石头旁：“我的星星宝石不见了！没有它，森林晚会就没法点亮彩灯了……”壮壮摸了摸口袋，早上捡到的亮晶晶石头好像就是莉莉说的宝石！他紧张地攥紧了拳头。",
+      "t2i_prompt": "Sad little rabbit with pink ears holding carrot, boy standing beside her with hands in pockets, worried expression, forest background with colorful mushrooms",
       "width": 800,
-      "height": 600
+      "height": 500
     },
     {
       "part_number": 4,
-      "content": "壮壮真诚地向花园道歉，突然，一朵更大的花在他面前绽放，花蕊中躺着一颗闪闪发光的宝石。吱吱高兴地说：“你的诚实打动了花园！”",
-      "t2i_prompt": "小男孩和小鸟站在一朵巨大的花前，花蕊中有一颗发光的宝石。",
+      "content": "“我……我没看见。”壮壮低下头，不敢看莉莉的眼睛。那天晚上，森林里的星星都暗了，往常的欢声笑语变成了悄悄议论。吱吱停在壮壮肩头：“宝石在你口袋里发光呢，诚实的孩子会让魔法更明亮哦。”",
+      "t2i_prompt": "Dark forest at night with dim stars, boy sitting on a log with head down, small bird on his shoulder, glowing stone peeking out of his pocket",
       "width": 800,
-      "height": 600
+      "height": 500
     },
     {
       "part_number": 5,
-      "content": "壮壮拿起宝石，许愿让花园恢复原样。瞬间，花园变得更加美丽，花朵们欢快地摇曳着。吱吱笑着说：“诚实的力量真神奇！”",
-      "t2i_prompt": "小男孩举起宝石，花园里的花朵重新绽放，小鸟在一旁飞舞。",
+      "content": "壮壮睡不着，想起莉莉红通通的眼睛。月光透过窗户照在宝石上，它突然黯淡下去，像一颗普通的石头。“原来不诚实会让魔法消失呀！”壮壮跳下床，抓起宝石往森林跑，雾气又开始氤氲，像在给他指路。",
+      "t2i_prompt": "Little boy running through misty forest path at night, holding a dim stone in hand, moonlight shining through trees, worried but determined expression",
       "width": 800,
-      "height": 600
+      "height": 500
     },
     {
       "part_number": 6,
-      "content": "回家的路上，壮壮遇到了一只迷路的小兔子。他想起吱吱的话，决定帮助小兔子找到家。吱吱赞许地点点头。",
-      "t2i_prompt": "小男孩和小鸟蹲在迷路的小兔子旁边，森林背景温馨。",
+      "content": "“对不起莉莉，我不该藏起宝石。”壮壮把星星宝石放在莉莉的胡萝卜篮子里。宝石“叮”地一声亮起来，比之前更耀眼！莉莉惊喜地抱住他：“谢谢你送回来！我们一起去开晚会吧！”",
+      "t2i_prompt": "Boy handing glowing star gem to happy rabbit, both smiling, sparkles around the gem, forest clearing with lanterns starting to light up",
       "width": 800,
-      "height": 600
+      "height": 500
     },
     {
       "part_number": 7,
-      "content": "壮壮和吱吱带着小兔子穿过森林，终于找到了它的家。兔妈妈感激地送给他们一篮子胡萝卜。壮壮开心地说：“帮助别人真快乐！”",
-      "t2i_prompt": "小男孩和小鸟站在兔子洞前，兔妈妈递给他们一篮子胡萝卜。",
+      "content": "晚会的彩灯像萤火虫一样闪烁，小动物们围着篝火跳舞。吱吱衔来一片金色的叶子：“这是诚实勋章！”壮壮把叶子别在胸前，突然明白：真正的魔法不是宝石，是说真话时心里暖暖的感觉。",
+      "t2i_prompt": "Forest party with animals dancing around bonfire, colorful lanterns hanging on trees, boy wearing a golden leaf badge on his chest, bird flying nearby",
       "width": 800,
-      "height": 600
+      "height": 500
     },
     {
       "part_number": 8,
-      "content": "第二天，壮壮在学校里发现同桌的小明偷拿了别人的铅笔。他想起自己的经历，决定劝小明痛改前非。",
-      "t2i_prompt": "小男孩在教室里，严肃地对另一个小男孩说话，小鸟停在窗台上。",
+      "content": "第二天清晨，壮壮在花园里发现更多小伙伴：松鼠送来坚果，小鹿带来野花。“因为你痛改前非，大家都想和你做朋友呀！”吱吱站在彩虹色的鸟窝里唱歌，阳光驱散了最后一丝氤氲，照得整个花园金灿灿的。",
+      "t2i_prompt": "Morning garden with golden sunlight, boy surrounded by friendly animals (squirrel, deer, rabbit), bird singing in a rainbow-colored nest, mist lifting",
       "width": 800,
-      "height": 600
+      "height": 500
     },
     {
       "part_number": 9,
-      "content": "小明起初不以为然，但壮壮耐心地告诉他诚实的重要性。小明终于承认错误，归还了铅笔。老师表扬了他们。",
-      "t2i_prompt": "两个小男孩在教室里握手言和，老师微笑着看着他们。",
+      "content": "壮壮把宝石放回树洞时，树洞里跳出一群发光的小精灵：“诚实的孩子会收到永远的冒险邀请！”他和吱吱击掌约定：“下次我们去云朵城堡探险吧！”欢声笑语又充满了每一个角落，比任何魔法都动听。",
+      "t2i_prompt": "Glowing fairies emerging from a tree hole, boy and bird high-fiving, rainbow forest in background with animals cheering, sparkles everywhere",
       "width": 800,
-      "height": 600
+      "height": 500
     },
     {
       "part_number": 10,
-      "content": "晚上，壮壮躺在床上，回想这一天的冒险。吱吱飞进窗口，对他说：“诚实守信会让你拥有更多朋友。”壮壮微笑着进入了梦乡。",
-      "t2i_prompt": "小男孩躺在床上，小鸟停在窗台上，月光洒进房间。",
+      "content": "妈妈喊壮壮回家吃早饭时，他的口袋里多了一片会发光的叶子。“壮壮今天帮助了朋友吗？”妈妈笑着问。壮壮用力点头：“诚实比宝石更珍贵！”窗外，吱吱正对着他唱起了诚实的歌。",
+      "t2i_prompt": "Boy sitting at breakfast table showing glowing leaf to his mother, mother smiling, bird singing outside the window, sunny kitchen with flowers",
       "width": 800,
-      "height": 600
+      "height": 500
     }
   ]
 }

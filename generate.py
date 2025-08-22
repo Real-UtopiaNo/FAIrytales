@@ -1,15 +1,17 @@
 import re
 import json
 import os
-from openai import OpenAI
+# from openai import OpenAI #不再需要直接导入
+from safety_checker import is_content_safe, is_prompt_safe # 导入两种安全检查函数
+from llm_api import generate_content_with_tools, generate_content
 
-# Initialize OpenAI client, compatible with DeepSeek API
-client = OpenAI(
-    api_key="sk-38195cc9744a44e385c221cb7b865ecc",  # Replace with your DeepSeek API key
-    base_url="https://api.deepseek.com/v1"
-)
+# # 初始化 OpenAI 客户端，兼容 DeepSeek API（已移至 llm_api.py）
+# client = OpenAI(
+#     api_key="sk-38195cc9744a44e385c221cb7b865ecc",  # 或写死你的 DeepSeek 密钥
+#     base_url="https://api.deepseek.com/v1"
+# )
 
-# --- Method 1: Function Calling (Preferred) ---
+# --- 方法一：Function Calling (首选) ---
 tools = [
     {
         "type": "function",
@@ -45,10 +47,11 @@ tools = [
     }
 ]
 
-# --- Method 2: Regex Parsing (Fallback) ---
+
+# --- 方法二：正则表达式解析 (备用) ---
 def parse_story_with_regex(text_blob: str, default_width: int = 512, default_height: int = 512):
     """
-    Use regex to parse structured story data from raw text returned by LLM.
+    使用正则表达式从LLM返回的原始文本中解析出结构化的故事数据。
     """
     print("--- Attempting to parse with Regex ---")
     pattern = re.compile(r"第(\d+)段：\s*内容：(.*?)\s*图片提示词：(.*?)(?=\s*第\d+段：|$)", re.DOTALL)
@@ -69,50 +72,88 @@ def parse_story_with_regex(text_blob: str, default_width: int = 512, default_hei
             "height": default_height  # Set the default height
         })
     
-    # Attempt to extract the title from the first line of text
+    # 尝试从文本第一行提取标题
     title_match = re.search(r"标题：(.*?)\n", text_blob)
     title = title_match.group(1).strip() if title_match else "Story Title (Parsed by Regex)"
     
     return {"title": title, "story_parts": story_parts}
 
-# --- Unified Generation and Parsing Function ---
-def generate_and_parse_story(prompt: str, default_width: int = 512, default_height: int = 512):
-    """
-    First try Function Calling, if it fails, fall back to Regex parsing.
-    """
-    print("--- Calling LLM with Function Calling enabled ---")
-    response = client.chat.completions.create(
-        model="deepseek-chat",
-        messages=[ 
-            {"role": "system", "content": "You are a helpful fairytale author. Prioritize using the `create_fairytale` function. If you cannot, fall back to providing a raw text response in the requested format."},
-            {"role": "user", "content": prompt}
-        ],
-        tools=tools,
-        tool_choice="auto"
-    )
 
-    message = response.choices[0].message
-    
-    # Prioritize Function Calling
-    if message.tool_calls:
-        print("--- Success: LLM used Function Calling! ---")
-        tool_call = message.tool_calls[0]
-        if tool_call.function.name == 'create_fairytale':
-            story_data = json.loads(tool_call.function.arguments)
-            # Add width and height to story parts if they are missing
-            for part in story_data.get("story_parts", []):
-                part["width"] = part.get("width", default_width)
-                part["height"] = part.get("height", default_height)
-            return story_data
-    
-    # If Function Calling is not used, try Regex parsing
-    print("--- Fallback: LLM did not use Function Calling. ---")
-    raw_text = message.content
-    if raw_text:
-        return parse_story_with_regex(raw_text, default_width, default_height)
+# --- 统一的生成和解析函数 ---
+def generate_and_parse_story(prompt: str, max_retries: int = 3, default_width: int = 512, default_height: int = 512):
+    """
+    增加了输入Prompt检查、内容安全审核和重试机制。
+    """
+    # 1. 在所有操作开始前，首先检查输入Prompt的安全性
+    if not is_prompt_safe(prompt):
+        # 如果输入不安全，直接终止，不进行任何生成尝试
+        print("\n--- Input prompt is deemed unsafe. Aborting generation. ---")
+        return None
+
+    system_prompt = """You are a helpful fairytale author. You must create content that is strictly appropriate for young children (ages 5-8).
+The story must be positive, gentle, and free of any scary, violent, sexual, or otherwise inappropriate themes.
+Prioritize using the `create_fairytale` function. If you cannot, fall back to providing a raw text response in the requested format."""
+
+    for attempt in range(max_retries):
+        print(f"\n--- Story Generation Attempt {attempt + 1} of {max_retries} ---")
         
-    # If both methods fail
-    print("--- Error: Both Function Calling and Regex parsing failed. ---")
+        print("--- Generating story with the following prompt ---")
+        print(prompt)
+        print("\n--- Calling LLM with Function Calling enabled ---")
+        
+        try:
+            message = generate_content_with_tools(
+                messages=[
+                    {"role": "system", "content": system_prompt},
+                    {"role": "user", "content": prompt}
+                ],
+                tools=tools
+            )
+
+            structured_story = None
+            
+            # 优先处理 Function Calling
+            if message.tool_calls:
+                print("--- Success: LLM used Function Calling! ---")
+                tool_call = message.tool_calls[0]
+                if tool_call.function.name == 'create_fairytale':
+                    structured_story = json.loads(tool_call.function.arguments)
+                    # 确保 width 和 height 存在
+                    for part in structured_story.get("story_parts", []):
+                        part["width"] = part.get("width", default_width)
+                        part["height"] = part.get("height", default_height)
+            
+            # 如果没有 Function Calling，则尝试 Regex 解析
+            elif message.content:
+                print("--- Fallback: LLM did not use Function Calling. ---")
+                raw_text = message.content
+                structured_story = parse_story_with_regex(raw_text, default_width, default_height)
+            
+            # 对成功解析出的故事进行安全检查
+            if structured_story:
+                if is_content_safe(structured_story):
+                    print("\n--- Story has been generated and passed safety checks. ---")
+                    print(json.dumps(structured_story, indent=2, ensure_ascii=False))
+                    
+                    # 在这里自动保存文件
+                    save_success = save_story_to_files(structured_story)
+                    if save_success:
+                        print("\n--- 故事内容已成功保存到文件 ---")
+                    else:
+                        print("\n--- 保存故事内容时出错 ---")
+
+                    return structured_story
+                else:
+                    # 内容不安全，继续下一次尝试
+                    continue
+            
+        except Exception as e:
+            print(f"An error occurred during story generation: {e}")
+            # 发生异常时，也继续下一次尝试
+            continue
+
+    # 如果所有尝试都失败了
+    print(f"\n--- Failed to generate a safe and valid story after {max_retries} attempts. ---")
     return None
 
 def save_story_to_files(story_data, base_path="books"):
@@ -163,22 +204,18 @@ def save_story_to_files(story_data, base_path="books"):
 
 # Example usage
 if __name__ == "__main__":
+    # 需要先加载llm配置
+    import llm_api
+    llm_api.load_config()
+
     prompt = "Please generate a fairytale story about a boy and a bird with image prompts for each part."
     
     # Generate and parse the story with width and height for each part
     structured_story = generate_and_parse_story(prompt)
 
     if structured_story:
-        print("\n--- Successfully generated and parsed story ---")
-        print(json.dumps(structured_story, indent=2, ensure_ascii=False))
-
-        # 保存故事到文件
-        save_success = save_story_to_files(structured_story)
-        if save_success:
-            print("\n--- 故事内容已成功保存到文件 ---")
-        else:
-            print("\n--- 保存故事内容时出错 ---")
-            
+        # 此时文件已在函数内部自动保存
+        print("\n--- Story generation and saving process complete. ---")
         # 打印段落信息
         for part in structured_story.get("story_parts", []):
             print(f"Part {part['part_number']} - Width: {part['width']}, Height: {part['height']}")

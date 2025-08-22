@@ -1,52 +1,41 @@
 from openai import OpenAI
 import yaml
 import os
+import sys
 import json
 from prompt import *
 from generate import *
-# from t2i import *  # t2i module not found, using image_generator instead
-from tts import process_story_for_tts
-from generate import generate_and_parse_story # 只导入我们需要的统一函数
+from t2i import *
+from tts import *
+from generate import generate_and_parse_story 
 from image_generator import process_story_for_images # 导入图片处理函数
 from pdf_generator import process_story_for_pdf # 导入PDF生成函数
 # import translators as ts
+from safety_checker import is_prompt_safe # 导入Prompt安全检查函数
+import llm_api # 导入新的API模块
 
 # def translate_text(text, target_language="en"):
 #     # Translate using Google Translator engine
 #     translated_text = ts.translate_text(text,to_language=target_language)
 #     return translated_text
 
-"""加载config文件"""
+
 with open("config.yaml", "r", encoding='utf-8') as file:
     config = yaml.safe_load(file)
 
+# 在所有操作开始前，加载并初始化LLM API配置
+llm_api.load_config()
 
 """根据config合成prompt"""
 # 1. 保持 prompt 生成逻辑不变
 prompt = generate_prompt(config=config)
-print("--- Generating story with the following prompt ---")
-print(prompt)
 
-"""调用LLM API获取故事内容以及文生图prompt"""
-# 2. 调用统一的生成和解析函数
+# 2. 调用统一的生成和解析函数(安全检查逻辑现在已封装在generate_and_parse_story内部)
 structured_story = generate_and_parse_story(prompt=prompt)
-if structured_story:
-    print("\n--- Successfully generated and parsed story ---")
-    print(json.dumps(structured_story, indent=2, ensure_ascii=False))
-
-    # 保存故事到文件
-    save_success = save_story_to_files(structured_story)
-    if save_success:
-        print("\n--- 故事内容已成功保存到文件 ---")
-    else:
-        print("\n--- 保存故事内容时出错 ---")
-
 
 """生成图片和朗读音频并整合文字与图片"""
 # 3. 打印最终的结构化数据
 if structured_story:
-    print("\n--- Successfully generated and parsed story ---")
-    print(json.dumps(structured_story, indent=2, ensure_ascii=False))
     # 确保图片生成的 prompt 是英文的
     print("\n--- Ensuring all image prompts are in English ---")
     for part in structured_story.get("story_parts", []):
